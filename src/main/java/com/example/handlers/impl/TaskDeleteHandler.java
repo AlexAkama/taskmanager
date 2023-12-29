@@ -1,19 +1,25 @@
 package com.example.handlers.impl;
 
-import com.example.handlers.AbstractHandler;
+import com.example.handlers.HttpAbstractHandler;
+import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
 import com.example.model.ITaskManager;
 import com.sun.net.httpserver.HttpExchange;
 
-public class TaskDeleteHandler extends AbstractHandler {
+public class TaskDeleteHandler extends HttpAbstractHandler {
 
     public TaskDeleteHandler(ITaskManager manager) {
         super(manager);
     }
 
     @Override
-    public String getRequestUrl() {
+    public String getRequestPath() {
         return "/api/tasks/delete";
+    }
+
+    @Override
+    public HttpMethod getHttpMethod() {
+        return HttpMethod.DELETE;
     }
 
     @Override

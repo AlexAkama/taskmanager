@@ -1,11 +1,14 @@
 package com.example.handlers;
 
+import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
 import com.sun.net.httpserver.HttpExchange;
 
-public interface RequestHandler {
+public interface HttpRequestHandler {
 
-    String getRequestUrl();
+    String getRequestPath();
+
+    HttpMethod getHttpMethod();
 
     HttpTaskResponse handle(HttpExchange exchange);
 

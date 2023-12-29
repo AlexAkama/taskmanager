@@ -1,26 +1,32 @@
 package com.example.handlers.impl;
 
-import com.example.handlers.AbstractHandler;
+import com.example.handlers.HttpAbstractHandler;
+import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
 import com.example.model.ITaskManager;
 import com.example.model.impl.Task;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 
-public class TaskUpdateHand extends AbstractHandler {
+public class TaskUpdateHandler extends HttpAbstractHandler {
 
-    public TaskUpdateHand(ITaskManager manager) {
+    public TaskUpdateHandler(ITaskManager manager) {
         super(manager);
     }
 
     @Override
-    public String getRequestUrl() {
+    public String getRequestPath() {
         return "/api/tasks/update";
     }
 
     @Override
+    public HttpMethod getHttpMethod() {
+        return HttpMethod.PATCH;
+    }
+
+    @Override
     public HttpTaskResponse handle(HttpExchange exchange) {
-        String requestBody = getRequestString(exchange);
+        String requestBody = getRequestBody(exchange);
         Task task = new Gson().fromJson(requestBody, Task.class);
         Long id = manager.updateTask(task);
         String responseText;

@@ -5,15 +5,15 @@ import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 
-public abstract class AbstractHandler implements RequestHandler {
+public abstract class HttpAbstractHandler implements HttpRequestHandler {
 
     protected final ITaskManager manager;
 
-    protected AbstractHandler(ITaskManager manager) {
+    protected HttpAbstractHandler(ITaskManager manager) {
         this.manager = manager;
     }
 
-    protected String getRequestString(HttpExchange exchange) {
+    protected String getRequestBody(HttpExchange exchange) {
         byte[] requestBodyBytes;
         try {
             requestBodyBytes = exchange.getRequestBody().readAllBytes();
