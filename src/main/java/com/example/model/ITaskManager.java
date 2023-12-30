@@ -12,13 +12,13 @@ public interface ITaskManager {
 
     List<ITask> getAllTasks();
 
-    Long addTask(ITask task);
+    ITask addTask(ITask task);
 
-    Long updateTask(ITask task);
+    ITask updateTask(ITask task);
 
-    Long deleteTask(Long id);
+    ITask deleteTask(Long id);
 
-    boolean linkTask(HttpLinkRequest request);
+    boolean addLink(HttpLinkRequest request);
 
 
 }

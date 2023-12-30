@@ -5,6 +5,7 @@ import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
 import com.example.model.ITask;
 import com.example.model.ITaskManager;
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 
 public class TaskGetByIdHandler extends HttpAbstractHandler {
@@ -31,7 +32,8 @@ public class TaskGetByIdHandler extends HttpAbstractHandler {
         ITask task = manager.getTask(id);
         if (task != null) {
             if (id > -1) {
-                return HttpTaskResponse.ok(exchange, "Задача. Id=" + id);
+                String json = new Gson().toJson(task);
+                return HttpTaskResponse.ok(exchange, json);
             } else {
                 return HttpTaskResponse.notFound(exchange);
             }

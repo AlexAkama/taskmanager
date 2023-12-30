@@ -3,6 +3,7 @@ package com.example.handlers.impl;
 import com.example.handlers.HttpAbstractHandler;
 import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
+import com.example.model.ITask;
 import com.example.model.ITaskManager;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -27,7 +28,8 @@ public class TaskDeleteHandler extends HttpAbstractHandler {
         String taskId = exchange.getRequestURI().getQuery().split("=")[1];
         System.out.println("Запрос на удаление задачи: id=" + taskId);
         Long id = Long.parseLong(taskId);
-        id = manager.deleteTask(id);
+        ITask task = manager.deleteTask(id);
+        id = task.getId();
         if (id != null) {
             if (id > -1) {
                 return HttpTaskResponse.ok(exchange, "Задача удалена успешно. Id=" + id);

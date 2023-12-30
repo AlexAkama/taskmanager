@@ -29,7 +29,7 @@ public class TaskLinkHandler extends HttpAbstractHandler {
         System.out.println("Запрос на связывание задач");
         String requestBody = getRequestBody(exchange);
         HttpLinkRequest request = new Gson().fromJson(requestBody, HttpLinkRequest.class);
-        if (manager.linkTask(request)) {
+        if (manager.addLink(request)) {
             return HttpTaskResponse.ok(exchange, "Задачи успешно связаны.");
         } else {
             return HttpTaskResponse.bad(exchange, "Не удалось связать задачи");

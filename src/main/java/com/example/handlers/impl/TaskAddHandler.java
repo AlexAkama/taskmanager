@@ -3,6 +3,7 @@ package com.example.handlers.impl;
 import com.example.handlers.HttpAbstractHandler;
 import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
+import com.example.model.ITask;
 import com.example.model.ITaskManager;
 import com.example.model.impl.Task;
 import com.google.gson.Gson;
@@ -28,8 +29,9 @@ public class TaskAddHandler extends HttpAbstractHandler {
     public HttpTaskResponse handle(HttpExchange exchange) {
         System.out.println("Запрос на добавление задачи");
         String requestBody = getRequestBody(exchange);
-        Task task = new Gson().fromJson(requestBody, Task.class);
-        Long id = manager.addTask(task);
+        Task request = new Gson().fromJson(requestBody, Task.class);
+        ITask response = manager.addTask(request);
+        Long id = response.getId();
         if (id != null) {
             if (id > -1) {
                 return HttpTaskResponse.ok(exchange, "Задача добавлена успешно: Id=" + id);

@@ -3,6 +3,7 @@ package com.example.handlers.impl;
 import com.example.handlers.HttpAbstractHandler;
 import com.example.http.HttpMethod;
 import com.example.http.HttpTaskResponse;
+import com.example.model.ITask;
 import com.example.model.ITaskManager;
 import com.example.model.impl.Task;
 import com.google.gson.Gson;
@@ -27,8 +28,9 @@ public class TaskUpdateHandler extends HttpAbstractHandler {
     @Override
     public HttpTaskResponse handle(HttpExchange exchange) {
         String requestBody = getRequestBody(exchange);
-        Task task = new Gson().fromJson(requestBody, Task.class);
-        Long id = manager.updateTask(task);
+        Task request = new Gson().fromJson(requestBody, Task.class);
+        ITask response = manager.updateTask(request);
+        Long id = response.getId();
         String responseText;
         if (id != null) {
             if (id > -1) {

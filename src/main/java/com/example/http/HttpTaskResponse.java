@@ -23,6 +23,7 @@ public class HttpTaskResponse {
     public void sendResponse() {
 
         try {
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(statusCode, body.getBytes().length);
         } catch (IOException e) {
             throw new RuntimeException(e);
